@@ -1,0 +1,12 @@
+%problem 5
+%Usage mace4 -c -f problem5.in > problem5.out
+
+assign(iterate_up_to, 10). % search up through order 10
+formulas(assumptions).
+
+e * x = x.    % left identity
+x' * x = e.   % left inverse
+(x * y) * z = x * (y * z). % associativity
+A * B != B * A. % A and B do not commute: non-Abelian group
+
+end_of_list.
