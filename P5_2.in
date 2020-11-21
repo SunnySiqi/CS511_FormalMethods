@@ -1,0 +1,14 @@
+%hw10 problem 5
+%Usage mace4 -c -f P5_2.in > P5_2.out
+
+assign(max_seconds, 90). % search up 90 seconds
+
+formulas(assumptions).
+%% Phi'
+(exists y R(x,y)) & (R(x,y) & R(x,z) -> (y = z)) -> (exists v exists w exists y ((v != w) & R(v,y) & R(w,y))).
+end_of_list.
+
+formulas(goals).
+% Phi
+(-R(x,c)) & (exists y R(x,y)) -> (exists v exists w exists y ( (v != w) & R(v,y) & R(w,y)) ).
+end_of_list.
