@@ -1,0 +1,38 @@
+%hw11 problem5
+%Usage /Users/siqiwang/course/BU/Formal_Method/LADR-2009-11A/bin/mace4 -c -f p5_d.in > p5_d.out
+%Usage mace4 -c -f p5_d.in > p5_d.out
+
+assign(max_seconds, 60). % search up through 60 seconds
+
+
+formulas(assumptions).
+% partially ordered set
+L(x,x).                         % reflexive
+L(x,y) & L(y,x) -> x = y.       % anti-symmetric
+L(x,y) & L(y,z) -> L(x,z).      % transitive
+
+% lattice
+L(B, x).                            % bottom element
+L(x, T).                            % top element
+L(LUB(x,y), z) <-> L(x,z) & L(y,z). % least upper bound LUB
+L(z, GLB(x,y)) <-> L(z,x) & L(z,y). % greatest lower bound GLB
+
+% distributive
+GLB(x, LUB(y,z)) = LUB(GLB(x,y), GLB(x,z)).  %GLB distributes over LUB
+LUB(x, GLB(y,z)) = GLB(LUB(x,y), LUB(x,z)).  %LUB distributes over GLB
+
+% boolean
+LUB(x, N(x)) = T.
+GLB(x, N(x)) = B.
+
+% additional constraint
+R(x, y) = LUB(N(x), y).
+
+end_of_list.
+
+formulas(goals).
+
+% Heyting algebra
+L(GLB(x,y), z) <-> L(x, R(y,z)).
+
+end_of_list.
